@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 # This script does many cool things.
 
-pgrep -f "100-process_and_pid_file" > /var/run/myscript.pid
+echo $$ > /var/run/myscript.pid
 
-trap "echo 'I hate the kill command'" 15
-trap "echo 'Y U no love me?!'" 2
-trap "rm /var/run/myscript.pid && exit 0" 3 15
+trap 'echo I hate the kill command; rm /var/run/myscript.pid; kill -SIGKILL $$' SIGTERM
+trap 'echo Y U no love me?!; kill -SIGKILL $$' SIGINT
+trap 'rm /var/run/myscript.pid; kill -SIGKILL $$' SIGQUIT
 
 while (true)
 do 
