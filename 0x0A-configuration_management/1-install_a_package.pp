@@ -1,11 +1,7 @@
-# Install flask using pip3
+#!/usr/bin/pup
+# Install a specific version of flask (2.1.0)
 
-package { 'python3-pip':
-  ensure => installed,
-}
-
-package { 'flask':
+package {'flask':
   ensure   => '2.1.0',
-  provider => 'pip3',
-  require  => Package['python3-pip'],
+  provider => 'pip3'
 }
