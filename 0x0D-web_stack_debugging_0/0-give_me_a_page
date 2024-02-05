@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Script that fixes the issue by starting apache server
+sudo service apache2 start
