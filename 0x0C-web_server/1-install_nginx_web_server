@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# This script sets up nginx on server
+
+# Install Nginx
+apt-get update
+apt-get install -y nginx
+
+# Ensure Nginx is listening on port 80
+sed -i 's/listen\s*80;/listen 80 default_server;/g' /etc/nginx/sites-available/default
+
+# Restart Nginx without using systemctl
+killall -s HUP nginx
+
+# Create a temporary HTML file with "Hello World!"
+echo "<html><head><title>Hello World!</title></head><body><h1>Hello World!</h1></body></html>" > /var/www/html/index.html
+
+# Verify Nginx configuration
+nginx -t
