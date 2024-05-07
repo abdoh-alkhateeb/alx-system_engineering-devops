@@ -11,7 +11,8 @@ def number_of_subscribers(subreddit: str) -> int:
     Function that returns the number of subscribers for a given subreddit.
     """
 
-    assert isinstance(subreddit, str)
+    if not isinstance(subreddit, str) or len(subreddit) == 0:
+        return 0
 
     headers = {
         "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:123.0) \
@@ -19,7 +20,7 @@ def number_of_subscribers(subreddit: str) -> int:
     }
 
     response = requests.get(
-        f"http://www.reddit.com/r/{subreddit}/about.json",
+        f"https://www.reddit.com/r/{subreddit}/about.json",
         headers=headers,
         allow_redirects=False,
     )
