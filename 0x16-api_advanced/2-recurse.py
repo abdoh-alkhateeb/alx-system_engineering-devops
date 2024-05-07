@@ -26,6 +26,7 @@ def recurse(
         headers=headers,
         params={"after": after},
         allow_redirects=False,
+        timeout=30,
     )
 
     if response.status_code != 200:
@@ -41,9 +42,9 @@ def recurse(
         after = json_response.get("data").get("after")
 
         if after is None:
-            return hot_list
-        else:
-            return recurse(subreddit, hot_list, after)
+            return hot_list or None
+
+        return recurse(subreddit, hot_list, after) or None
 
     except ValueError:
         return None

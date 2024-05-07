@@ -25,6 +25,7 @@ def top_ten(subreddit: str) -> None:
         headers=headers,
         params={"limit": 10},
         allow_redirects=False,
+        timeout=30,
     )
 
     if response.status_code != 200:
